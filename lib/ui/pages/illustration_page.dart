@@ -5,17 +5,17 @@ class IllustrationPage extends StatelessWidget {
   final String subtitle;
   final String picturePath;
   final String buttonTitle1;
-  final String buttonTitle2;
+  final String? buttonTitle2;
   final Function buttonTap1;
-  final Function buttonTap2;
+  final Function? buttonTap2;
 
   IllustrationPage(
-      {@required this.title,
-      @required this.subtitle,
-      @required this.picturePath,
-      @required this.buttonTap1,
+      {required this.title,
+      required this.subtitle,
+      required this.picturePath,
+      required this.buttonTap1,
       this.buttonTap2,
-      @required this.buttonTitle1,
+      required this.buttonTitle1,
       this.buttonTitle2});
 
   @override
@@ -45,7 +45,9 @@ class IllustrationPage extends StatelessWidget {
             width: 200,
             height: 45,
             child: TextButton(
-              onPressed: buttonTap1,
+              onPressed: () {
+                buttonTap1();
+              },
               style: TextButton.styleFrom(
                 backgroundColor: mainColor,
                 elevation: 0,
@@ -64,7 +66,9 @@ class IllustrationPage extends StatelessWidget {
                   width: 200,
                   height: 45,
                   child: TextButton(
-                    onPressed: buttonTap2,
+                    onPressed: () {
+                      buttonTap2!();
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: '8D92A3'.toColor(),
                       elevation: 0,

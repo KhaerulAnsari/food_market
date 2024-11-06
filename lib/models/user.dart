@@ -1,15 +1,15 @@
 part of 'models.dart';
 
 class User extends Equatable {
-  final int id;
-  final String name;
-  final String email;
-  final String address;
-  final String houseNumber;
-  final String phoneNumber;
-  final String city;
-  final String picturePath;
-  static String token;
+  final int? id;
+  final String? name;
+  final String? email;
+  final String? address;
+  final String? houseNumber;
+  final String? phoneNumber;
+  final String? city;
+  final String? picturePath;
+  static String? token;
 
   User(
       {this.id,
@@ -33,14 +33,14 @@ class User extends Equatable {
       );
 
   User copyWith({
-    int id,
-    String name,
-    String email,
-    String address,
-    String houseNumber,
-    String phoneNumber,
-    String city,
-    String picturePath,
+    int? id,
+    String? name,
+    String? email,
+    String? address,
+    String? houseNumber,
+    String? phoneNumber,
+    String? city,
+    String? picturePath,
   }) =>
       User(
           id: id ?? this.id,
@@ -54,7 +54,7 @@ class User extends Equatable {
 
   @override
   List<Object> get props =>
-      [id, name, email, address, houseNumber, phoneNumber, city, picturePath];
+      [id!, name!, email!, address!, houseNumber!, phoneNumber!, city!, picturePath!];
 }
 
 User mockUser = User(

@@ -14,20 +14,20 @@ class UserCubit extends Cubit<UserState> {
     ApiReturnValue<User> result = await UserServices.signIn(email, password);
 
     if (result.value != null) {
-      emit(UserLoaded(result.value));
+      emit(UserLoaded(result.value!));
     } else {
-      emit(UserLoadingFailed(result.message));
+      emit(UserLoadingFailed(result.message!));
     }
   }
 
-  Future<void> signUp(User user, String password, {File pictureFile}) async {
+  Future<void> signUp(User user, String password, {File? pictureFile}) async {
     ApiReturnValue<User> result =
         await UserServices.signUp(user, password, pictureFile: pictureFile);
 
     if (result.value != null) {
-      emit(UserLoaded(result.value));
+      emit(UserLoaded(result.value!));
     } else {
-      emit(UserLoadingFailed(result.message));
+      emit(UserLoadingFailed(result.message!));
     }
   }
 
@@ -38,7 +38,7 @@ class UserCubit extends Cubit<UserState> {
     if (result.value != null) {
       emit(UserLoaded((state as UserLoaded).user.copyWith(
           picturePath: "http://foodmarket-backend.buildwithangga.id/storage/" +
-              result.value)));
+              result.value!)));
     }
   }
 }

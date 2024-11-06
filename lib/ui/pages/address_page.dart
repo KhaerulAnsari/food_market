@@ -16,15 +16,15 @@ class _AddressPageState extends State<AddressPage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController houseNumController = TextEditingController();
   bool isLoading = false;
-  List<String> cities;
-  String selectedCity;
+  List<String>? cities;
+  String? selectedCity;
 
   @override
   void initState() {
     super.initState();
 
     cities = ['Bandung', 'Jakarta', 'Surabaya'];
-    selectedCity = cities[0];
+    selectedCity = cities![0];
   }
 
   @override
@@ -126,7 +126,7 @@ class _AddressPageState extends State<AddressPage> {
                 isExpanded: true,
                 underline: SizedBox(),
                 items: cities
-                    .map((e) => DropdownMenuItem(
+                    !.map((e) => DropdownMenuItem(
                         value: e,
                         child: Text(
                           e,
@@ -135,7 +135,7 @@ class _AddressPageState extends State<AddressPage> {
                     .toList(),
                 onChanged: (item) {
                   setState(() {
-                    selectedCity = item;
+                    selectedCity = item.toString();
                   });
                 }),
           ),
@@ -154,21 +154,21 @@ class _AddressPageState extends State<AddressPage> {
                           phoneNumber: phoneController.text,
                           address: addressController.text,
                           houseNumber: houseNumController.text,
-                          city: selectedCity);
+                          city: selectedCity!);
 
                       setState(() {
                         isLoading = true;
                       });
 
-                      await context.bloc<UserCubit>().signUp(
+                      await context.read<UserCubit>().signUp(
                           user, widget.password,
                           pictureFile: widget.pictureFile);
 
-                      UserState state = context.bloc<UserCubit>().state;
+                      UserState state = context.read<UserCubit>().state;
 
                       if (state is UserLoaded) {
-                        context.bloc<FoodCubit>().getFoods();
-                        context.bloc<TransactionCubit>().getTransactions();
+                        context.read<FoodCubit>().getFoods();
+                        context.read<TransactionCubit>().getTransactions();
                         Get.to(MainPage());
                       } else {
                         Get.snackbar("", "",

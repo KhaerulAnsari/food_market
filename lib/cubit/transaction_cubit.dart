@@ -13,9 +13,9 @@ class TransactionCubit extends Cubit<TransactionState> {
         await TransactionServices.getTransactions();
 
     if (result.value != null) {
-      emit(TransactionLoaded(result.value));
+      emit(TransactionLoaded(result.value!));
     } else {
-      emit(TransactionLoadingFailed(result.message));
+      emit(TransactionLoadingFailed(result.message!));
     }
   }
 
@@ -25,10 +25,10 @@ class TransactionCubit extends Cubit<TransactionState> {
 
     if (result.value != null) {
       emit(TransactionLoaded(
-          (state as TransactionLoaded).transactions + [result.value]));
-      return result.value.paymentUrl;
+          (state as TransactionLoaded).transactions + [result.value!]));
+      return result.value!.paymentUrl!;
     } else {
-      return null;
+      return 'Erorr';
     }
   }
 }

@@ -48,9 +48,9 @@ class _FoodPageState extends State<FoodPage> {
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
                             image: NetworkImage(
-                                (context.bloc<UserCubit>().state as UserLoaded)
+                                (context.read<UserCubit>().state as UserLoaded)
                                     .user
-                                    .picturePath),
+                                    .picturePath!),
                             fit: BoxFit.cover)),
                   )
                 ],
@@ -79,7 +79,7 @@ class _FoodPageState extends State<FoodPage> {
                                               transaction: Transaction(
                                                   food: e,
                                                   user: (context
-                                                          .bloc<UserCubit>()
+                                                          .read<UserCubit>()
                                                           .state as UserLoaded)
                                                       .user),
                                               onBackButtonPressed: () {

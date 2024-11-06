@@ -2,12 +2,12 @@ part of 'services.dart';
 
 class TransactionServices {
   static Future<ApiReturnValue<List<Transaction>>> getTransactions(
-      {http.Client client}) async {
+      {http.Client? client}) async {
     client ??= http.Client();
 
     String url = baseURL + 'transaction/?limit=1000';
 
-    var response = await client.get(url, headers: {
+    var response = await client.get(Uri.parse(url), headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer ${User.token}"
     });
@@ -27,19 +27,19 @@ class TransactionServices {
 
   static Future<ApiReturnValue<Transaction>> submitTransaction(
       Transaction transaction,
-      {http.Client client}) async {
+      {http.Client? client}) async {
     client ??= http.Client();
 
     String url = baseURL + 'checkout';
 
-    var response = await client.post(url,
+    var response = await client.post(Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer ${User.token}"
         },
         body: jsonEncode(<String, dynamic>{
-          'food_id': transaction.food.id,
-          'user_id': transaction.user.id,
+          'food_id': transaction.food!.id,
+          'user_id': transaction.user!.id,
           "quantity": transaction.quantity,
           "total": transaction.total,
           "status": "PENDING"

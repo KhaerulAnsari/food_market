@@ -37,22 +37,22 @@ class _ProfilePageState extends State<ProfilePage> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 image: NetworkImage((context
-                                        .bloc<UserCubit>()
+                                        .read<UserCubit>()
                                         .state as UserLoaded)
                                     .user
-                                    .picturePath),
+                                    .picturePath!),
                                 fit: BoxFit.cover)),
                       ),
                     ),
                     Text(
-                      (context.bloc<UserCubit>().state as UserLoaded).user.name,
+                      (context.read<UserCubit>().state as UserLoaded).user.name!,
                       style: GoogleFonts.poppins(
                           fontSize: 18, fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      (context.bloc<UserCubit>().state as UserLoaded)
+                      (context.read<UserCubit>().state as UserLoaded)
                           .user
-                          .email,
+                          .email!,
                       style:
                           greyFontStyle.copyWith(fontWeight: FontWeight.w300),
                     )

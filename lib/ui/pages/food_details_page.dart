@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
 class FoodDetailsPage extends StatefulWidget {
-  final Function onBackButtonPressed;
-  final Transaction transaction;
+  final Function? onBackButtonPressed;
+  final Transaction? transaction;
 
   FoodDetailsPage({this.onBackButtonPressed, this.transaction});
 
@@ -31,7 +31,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(widget.transaction.food.picturePath),
+                    image: NetworkImage(widget.transaction!.food!.picturePath!),
                     fit: BoxFit.cover)),
           )),
           SafeArea(
@@ -48,7 +48,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                       child: GestureDetector(
                         onTap: () {
                           if (widget.onBackButtonPressed != null) {
-                            widget.onBackButtonPressed();
+                            widget.onBackButtonPressed!();
                           }
                         },
                         child: Container(
@@ -85,14 +85,14 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                   width: MediaQuery.of(context).size.width -
                                       134, // 32 + 102
                                   child: Text(
-                                    widget.transaction.food.name,
+                                    widget.transaction!.food!.name!,
                                     style: blackFontStyle2,
                                   ),
                                 ),
                                 SizedBox(
                                   height: 6,
                                 ),
-                                RatingStars(widget.transaction.food.rate)
+                                RatingStars(widget.transaction!.food!.rate!)
                               ],
                             ),
                             Row(
@@ -146,7 +146,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 14, 0, 16),
                           child: Text(
-                            widget.transaction.food.description,
+                            widget.transaction!.food!.description!,
                             style: greyFontStyle,
                           ),
                         ),
@@ -157,7 +157,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 4, 0, 41),
                           child: Text(
-                            widget.transaction.food.ingredients,
+                            widget.transaction!.food!.ingredients!,
                             style: greyFontStyle,
                           ),
                         ),
@@ -177,7 +177,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                           symbol: 'IDR ',
                                           decimalDigits: 0)
                                       .format(quantity *
-                                          widget.transaction.food.price),
+                                          widget.transaction!.food!.price!),
                                   style: blackFontStyle2.copyWith(fontSize: 18),
                                 )
                               ],
@@ -188,10 +188,10 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                               child: TextButton(
                                 onPressed: () {
                                   Get.to(PaymentPage(
-                                    transaction: widget.transaction.copyWith(
+                                    transaction: widget.transaction!.copyWith(
                                         quantity: quantity,
                                         total: quantity *
-                                            widget.transaction.food.price),
+                                            widget.transaction!.food!.price!),
                                   ));
                                 },
                                 style: TextButton.styleFrom(

@@ -3,9 +3,9 @@ part of 'pages.dart';
 class GeneralPage extends StatelessWidget {
   final String title;
   final String subtitle;
-  final Function onBackButtonPressed;
-  final Widget child;
-  final Color backColor;
+  final Function? onBackButtonPressed;
+  final Widget? child;
+  final Color? backColor;
 
   GeneralPage(
       {this.title = "Title",
@@ -40,7 +40,7 @@ class GeneralPage extends StatelessWidget {
                             ? GestureDetector(
                                 onTap: () {
                                   if (onBackButtonPressed != null) {
-                                    onBackButtonPressed();
+                                    onBackButtonPressed!();
                                   }
                                 },
                                 child: Container(

@@ -2,19 +2,20 @@ part of 'services.dart';
 
 class UserServices {
   static Future<ApiReturnValue<User>> signIn(String email, String password,
-      {http.Client client}) async {
+      {http.Client? client}) async {
     if (client == null) {
       client = http.Client();
     }
 
     String url = baseURL + 'login';
 
-    var response = await client.post(url,
+    var response = await client.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"},
         body:
             jsonEncode(<String, String>{'email': email, 'password': password}));
 
     if (response.statusCode != 200) {
+      print("Status Code  : " + response.statusCode.toString());
       return ApiReturnValue(message: 'Please try again');
     }
 
@@ -27,24 +28,24 @@ class UserServices {
   }
 
   static Future<ApiReturnValue<User>> signUp(User user, String password,
-      {File pictureFile, http.Client client}) async {
+      {File? pictureFile, http.Client? client}) async {
     if (client == null) {
       client = http.Client();
     }
 
     String url = baseURL + 'register';
 
-    var response = await client.post(url,
+    var response = await client.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(<String, String>{
-          'name': user.name,
-          'email': user.email,
+          'name': user.name ?? '',
+          'email': user.email ?? '',
           'password': password,
           'password_confirmation': password,
-          'address': user.address,
-          'city': user.city,
-          'houseNumber': user.houseNumber,
-          'phoneNumber': user.phoneNumber
+          'address': user.address ?? '',
+          'city': user.city ?? '',
+          'houseNumber': user.houseNumber ?? '',
+          'phoneNumber': user.phoneNumber ?? '',
         }));
 
     if (response.statusCode != 200) {
@@ -62,7 +63,7 @@ class UserServices {
         value = value.copyWith(
             picturePath:
                 "http://foodmarket-backend.buildwithangga.id/storage/" +
-                    result.value);
+                    result.value!);
       }
     }
 
@@ -70,7 +71,7 @@ class UserServices {
   }
 
   static Future<ApiReturnValue<String>> uploadProfilePicture(File pictureFile,
-      {http.MultipartRequest request}) async {
+      {http.MultipartRequest? request}) async {
     String url = baseURL + 'user/photo';
     var uri = Uri.parse(url);
 

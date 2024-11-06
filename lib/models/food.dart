@@ -3,13 +3,13 @@ part of 'models.dart';
 enum FoodType { new_food, popular, recommended }
 
 class Food extends Equatable {
-  final int id;
-  final String picturePath;
-  final String name;
-  final String description;
-  final String ingredients;
-  final int price;
-  final double rate;
+  final int? id;
+  final String? picturePath;
+  final String? name;
+  final String? description;
+  final String? ingredients;
+  final int? price;
+  final double? rate;
   final List<FoodType> types;
 
   Food(
@@ -34,10 +34,10 @@ class Food extends Equatable {
         switch (e) {
           case 'recommended':
             return FoodType.recommended;
-            break;
+       
           case 'popular':
             return FoodType.popular;
-            break;
+        
           default:
             return FoodType.new_food;
         }
@@ -45,7 +45,7 @@ class Food extends Equatable {
 
   @override
   List<Object> get props =>
-      [id, picturePath, name, description, ingredients, price, rate];
+      [id ?? '', picturePath ?? '', name ?? '', description ?? '', ingredients ?? '', price ?? '', rate ?? 0];
 }
 
 List<Food> mockFoods = [

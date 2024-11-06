@@ -12,9 +12,9 @@ class FoodCubit extends Cubit<FoodState> {
     ApiReturnValue<List<Food>> result = await FoodServices.getFoods();
 
     if (result.value != null) {
-      emit(FoodLoaded(result.value));
+      emit(FoodLoaded(result.value!));
     } else {
-      emit(FoodLoadingFailed(result.message));
+      emit(FoodLoadingFailed(result.message!));
     }
   }
 }

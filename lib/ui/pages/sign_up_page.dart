@@ -6,8 +6,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  User user;
-  File pictureFile;
+  User? user;
+  File? pictureFile;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -25,8 +25,8 @@ class _SignUpPageState extends State<SignUpPage> {
         children: [
           GestureDetector(
             onTap: () async {
-              PickedFile pickedFile =
-                  await ImagePicker().getImage(source: ImageSource.gallery);
+              XFile? pickedFile =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
               if (pickedFile != null) {
                 pictureFile = File(pickedFile.path);
                 setState(() {});
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: FileImage(pictureFile),
+                              image: FileImage(pictureFile!),
                               fit: BoxFit.cover)),
                     )
                   : Container(
@@ -134,13 +134,15 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: TextButton(
               onPressed: () {
-                Get.to(AddressPage(
-                    User(
-                      name: nameController.text,
-                      email: emailController.text,
-                    ),
-                    passwordController.text,
-                    pictureFile));
+                Get.to(
+                  AddressPage(
+                      User(
+                        name: nameController.text,
+                        email: emailController.text,
+                      ),
+                      passwordController.text,
+                      pictureFile!),
+                );
               },
               style: TextButton.styleFrom(
                 elevation: 0,

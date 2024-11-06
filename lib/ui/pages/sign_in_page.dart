@@ -77,13 +77,13 @@ class _SignInPageState extends State<SignInPage> {
                         isLoading = true;
                       });
 
-                      await context.bloc<UserCubit>().signIn(
+                      await context.read<UserCubit>().signIn(
                           emailController.text, passwordController.text);
-                      UserState state = context.bloc<UserCubit>().state;
+                      UserState state = context.read<UserCubit>().state;
 
                       if (state is UserLoaded) {
-                        context.bloc<FoodCubit>().getFoods();
-                        context.bloc<TransactionCubit>().getTransactions();
+                        context.read<FoodCubit>().getFoods();
+                        context.read<TransactionCubit>().getTransactions();
                         Get.to(MainPage());
                       } else {
                         Get.snackbar("", "",
@@ -125,27 +125,22 @@ class _SignInPageState extends State<SignInPage> {
             margin: EdgeInsets.only(top: 24),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
-                ? SpinKitFadingCircle(
-                    size: 45,
-                    color: mainColor,
-                  )
-                : TextButton(
-                    onPressed: () {
-                      Get.to(SignUpPage());
-                    },
-                    style: TextButton.styleFrom(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      backgroundColor: greyColor,
-                    ),
-                    child: Text(
-                      'Create New Account',
-                      style: GoogleFonts.poppins(
-                          color: Colors.white, fontWeight: FontWeight.w500),
-                    ),
-                  ),
+            child: TextButton(
+              onPressed: () {
+                Get.to(SignUpPage());
+              },
+              style: TextButton.styleFrom(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                backgroundColor: greyColor,
+              ),
+              child: Text(
+                'Create New Account',
+                style: GoogleFonts.poppins(
+                    color: Colors.white, fontWeight: FontWeight.w500),
+              ),
+            ),
           )
         ],
       ),

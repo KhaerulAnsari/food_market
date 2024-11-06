@@ -4,7 +4,7 @@ class FoodListItem extends StatelessWidget {
   final Food food;
   final double itemWidth;
 
-  FoodListItem({@required this.food, @required this.itemWidth});
+  FoodListItem({required this.food, required this.itemWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class FoodListItem extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                  image: NetworkImage(food.picturePath), fit: BoxFit.cover)),
+                  image: NetworkImage(food.picturePath!), fit: BoxFit.cover)),
         ),
         SizedBox(
           width: itemWidth - 182, // (60 + 12 + 110)
@@ -25,7 +25,7 @@ class FoodListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                food.name,
+                food.name!,
                 style: blackFontStyle2,
                 maxLines: 1,
                 overflow: TextOverflow.clip,
@@ -39,7 +39,7 @@ class FoodListItem extends StatelessWidget {
             ],
           ),
         ),
-        RatingStars(food.rate)
+        RatingStars(food.rate!)
       ],
     );
   }

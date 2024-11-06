@@ -10,8 +10,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int selectedPage;
-  PageController pageController;
+  int? selectedPage = 0;
+  PageController? pageController;
 
   @override
   void initState() {
@@ -55,12 +55,12 @@ class _MainPageState extends State<MainPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: CustomBottomNavBar(
-              selectedIndex: selectedPage,
+              selectedIndex: selectedPage!,
               onTap: (index) {
                 setState(() {
                   selectedPage = index;
                 });
-                pageController.jumpToPage(selectedPage);
+                pageController!.jumpToPage(selectedPage!);
               },
             ),
           )
